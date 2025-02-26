@@ -86,12 +86,11 @@ public class JudgeServiceImpl implements JudgeService {
             executeCodeResponse = codeSandbox.executeCode(executeCodeRequest);
             System.out.println("代码沙箱返回结果：" + executeCodeResponse);
         } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
             // 设置题目提交状态为失败
             log.error("代码提交失败！");
             questionSubmitUpdate.setStatus(QuestionSubmitStatusEnum.FAILED.getValue());
             questionFeignClient.updateQuestionSubmitById(questionSubmitUpdate);
+            throw new RuntimeException(e);
         }
         JudgeInfo exeJudgeInfo = executeCodeResponse.getJudgeInfo();
         List<String> outputList = executeCodeResponse.getOutputList();

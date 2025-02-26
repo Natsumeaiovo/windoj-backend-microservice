@@ -8,6 +8,7 @@ class WindojJudgeServiceApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println(true);
     }
 
 }
